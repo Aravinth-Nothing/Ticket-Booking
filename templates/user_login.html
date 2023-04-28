@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body class="body-login">
+    <div class="container-login">
+        <h1 class="h1-login">User Login</h1>
+        <form method="POST" action="{{ url_for('user_login') }}" class="form-login">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <center><p class="p-login">{{message}}</p></center>
+            <button type="submit" class="button-login">Login</button>
+            <a href="{{ url_for('register')}}" class="button-login" style="text-align: center;">Register</a>
+            <a href="{{url_for('index')}}" style="color:white; text-decoration: none;" class="button-login btn btn-primary btn-lg btn-block">Home</a>
+        </form>
+    </div>
+</body>
+</html>

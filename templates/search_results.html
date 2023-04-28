@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+      .hovering:hover{
+        background-color: transparent;
+      }
+    </style>
+    <title>Search Results</title>
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <span class="fs-4" style="margin-right: 16rem;">TicketBooking</span>
+          </a>
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{url_for('user_page')}}" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="{{url_for('bookings')}}" class="nav-link">My Bookings</a></li>
+            <li class="nav-item"><a href="{{url_for('index')}}" class="nav-link">Logout</a></li>
+          </ul>
+        </header>
+      </div>
+    <h1>Search Results</h1>
+    {% if shows %}
+    <h2>Show Matches</h2>
+    <div class="scrolling-wrapper-flexbox" style="display: flex; overflow-x: scroll;">
+    {% for show in shows %}
+          <div class="show row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="margin: 1.5rem; width: 17rem; flex-shrink: 0;">
+            <div class="col p-4 d-flex flex-column position-static">
+              <p>Movie Name:{{ show[1] }}</p>
+              <p>Rating: {{ show[2] }}</p>
+              <p>Timing: {{ show[3] }}</p>
+                <p>Venue: {{show[8]}}</p>
+              <p>Genre: {{ show[4] }}</p>
+              <p>Price: {{ show[5] }}</p>
+              </div>
+              </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if venues %}
+        <h2>Venue Matches</h2>
+        <div class="scrolling-wrapper-flexbox" style="display: flex; overflow-x: scroll;">
+    {% for venue in venues %}
+          <div class="show row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="margin: 1.5rem; width: 17rem; flex-shrink: 0;">
+            <div class="col p-4 d-flex flex-column position-static">
+              <p>Venue Name:{{ venue[1] }}</p>
+              <p>Place: {{ venue[2] }}</p>
+              <p>Capacity: {{ venue[3] }}</p>
+              <p>Location: {{ venue[4] }}</p>
+              </div>
+              </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+    </ul>
+</body>
+</html>

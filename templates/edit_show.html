@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Show Details</title>
+    <style>
+      .hovering:hover{
+        background-color: transparent;
+      }
+    </style>
+</head>
+<body style="margin: 0rem 1rem 1rem 1rem;">
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <span class="fs-4" style="margin-right: 16rem;">TicketBooking</span>
+          </a>
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{url_for('admin_page')}}" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="{{url_for('index')}}" class="nav-link">Logout</a></li>
+          </ul>
+        </header>
+      </div>
+    <h1>Add New Show</h1>
+    <form action="{{ url_for('update_show', show_id=show[0]) }}" method="POST">
+        <div class="form-group">
+            <label for="s-name">Show Name</label>
+            <input id="s-name" type="text" name="name" placeholder="Show Name" class="form-control" style="width: fit-content;" value="{{show[1]}}">
+        </div>
+        <div class="form-group">
+          <label for="s-rating">Rating</label>
+          <input id="s-rating" type="text" name="rating" placeholder="Rating" class="form-control" style="width: fit-content;" value="{{show[2]}}">
+      </div>
+      <div class="form-group">
+        <label for="s-timing">Timing</label>
+        <input id="s-timing" type="text" name="timing" placeholder="Timing" class="form-control" style="width: fit-content;" value="{{show[3]}}">
+    </div>
+    <div class="form-group">
+      <label for="s-tags">Tags</label>
+      <input id="s-tags" type="text" name="tags" placeholder="Tags" class="form-control" style="width: fit-content;" value="{{show[4]}}"> 
+    </div>
+    <div class="form-group">
+      <label for="s-price">Price</label>
+      <input id="s-name" type="text" name="price" placeholder="Price" class="form-control" style="width: fit-content;" value="{{show[5]}}">
+    </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</body>
+</html>

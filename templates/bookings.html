@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+      .hovering:hover{
+        background-color: transparent;
+      }
+      .booking-block {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+      }
+      .booking-block h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      .booking-block h4 {
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+      .booking-block h5 {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <span class="fs-4" style="margin-right: 16rem;">TicketBooking</span>
+          </a>
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{url_for('user_page')}}" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="{{url_for('index')}}" class="nav-link">Logout</a></li>
+          </ul>
+        </header>
+      </div>
+      <div class="container" style="display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start;">
+        <center><h1>My Bookings</h1></center>
+        {%for booking in bookings%}
+        <div class="booking-block" style="width: 100%;">
+        <h3>{{booking[1]}}</h3>
+        <h4>{{booking[3]}}</h4>
+        <h5>{{booking[2]}}</h5>
+        <h5 style="margin-left: auto;">No Of Seats: {{booking[4]}}</h5>
+        <h5 style="margin-left: auto;">Price of Ticket: {{booking[5]}}</h5>
+        </div>
+        {%endfor%}
+      </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+</body>
+</html>

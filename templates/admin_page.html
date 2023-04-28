@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+      .hovering:hover{
+        background-color: transparent;
+      }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4" style="margin-right: 16rem;">TicketBooking</span>
+      </a>
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{{url_for('admin_page')}}" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="{{url_for('index')}}" class="nav-link">Logout</a></li>
+      </ul>
+    </header>
+  </div>
+    <center><a href="{{url_for('new_venue')}}" class="btn btn-primary" style="margin-bottom: 1rem;">Add New Venue</a></center>
+    {% for venue in venues %}
+    <div class="venue p-2 p-md-3 mb-2" style="background-color: rgb(60, 60, 60);">
+      <h2 style="color: rgb(249, 249, 249); margin-left: 1.5rem;">{{ venue[1] }}</h2>
+    <div class="venue">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+            Venue Details
+          </button>
+          <div style="display: flex; margin-top: 1rem;">
+          <form action="{{ url_for('delete_venue', venue_id=venue[0]) }}" method="POST" class="dropdown-item hovering" style="width: fit-content; padding-left: 0px;">
+            <button type="submit" class="btn btn-primary">Delete</button>
+          </form>
+          <form action="{{ url_for('edit_venue', venue_id=venue[0]) }}" method="POST" class="dropdown-item hovering" style="padding-left: 0rem;">
+            <button type="submit" class="btn btn-primary">Edit</button>
+          </form>
+          </div>
+          <a href="{{url_for('new_show',id=venue[0])}}" class="btn btn-primary" style="margin: 1rem 0.5rem;">Add New Show</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: fit-content;">
+            <a class="dropdown-item" href="#">Place: {{ venue[2] }}</a>
+            <a class="dropdown-item" href="#">Capacity: {{ venue[3] }}</a>
+            <a class="dropdown-item" href="#">Location: {{ venue[4] }}</a>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="scrolling-wrapper-flexbox" style="display: flex; overflow-x: scroll;">
+        {% for show in shows %}
+          {% if venue[0] == show[6] %}
+            <div class="show row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="margin: 1.5rem; width: 17rem; flex-shrink: 0;">
+              <div class="col p-4 d-flex flex-column position-static">
+                <p>Movie Name:{{ show[1] }}</p>
+                <p>Rating: {{ show[2] }}</p>
+                <p>Timing: {{ show[3] }}</p>
+                <p>Genre: {{ show[4] }}</p>
+                <p>Price: {{ show[5] }}</p>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                  Actions
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: fit-content;">
+                  <form action="{{ url_for('delete_show', show_id=show[0]) }}" method="POST" class="dropdown-item">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                  </form>
+                  <form action="{{ url_for('edit_show', show_id=show[0], venue_id=venue[0]) }}" method="POST" class="dropdown-item">
+                    <button type="submit" class="btn btn-secondary">Edit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>      
+{% endfor %}
+</body>
+</html>

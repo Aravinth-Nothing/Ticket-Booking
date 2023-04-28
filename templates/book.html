@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Page</title>
+    <style>
+      .hovering:hover{
+        background-color: transparent;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <span class="fs-4" style="margin-right: 16rem;">TicketBooking</span>
+          </a>
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{url_for('user_page')}}" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="{{url_for('index')}}" class="nav-link">Logout</a></li>
+          </ul>
+        </header>
+      </div>
+    <center><h1>Booking</h1></center>
+    <div class="container d-flex align-items-center">
+    <form action="{{url_for('book')}}", method="POST" class="mx-auto">
+        <input type="hidden" name="show_id" value="{{ show_id }}">
+        <input type="hidden" name="venue_id" value="{{ venue_id }}">
+        <div class="show row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="margin-top: 1.5rem; width: 17rem; flex-shrink: 0;">
+        <div class="col p-4 d-flex flex-column position-static">
+        <label>Number of Tickets:</label>
+        <input type="text" name="no_tickets" id="no_tickets"  placeholder="No Of Tickets" style="margin-top: 0.7rem;">
+        <center><p style="margin-top: 0.7rem;">Price:{{price}}</p></center>
+        <input type="submit" class="btn btn-primary" value="Confirm Bookings">
+    </form>
+    {%if no_tickets%}
+        <center><p style="margin-top: 0.7rem; margin-bottom: 0rem;">The Total Cost is: {{no_tickets|to_int*price}}</p></center>
+        <center><p>The Tickets are Booked</p></center>
+    {%endif%}
+    <center><p>{{message}}</p></center>
+    </div>
+</body>
+</html>
